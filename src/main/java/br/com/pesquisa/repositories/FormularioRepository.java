@@ -3,9 +3,12 @@ package br.com.pesquisa.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import br.com.pesquisa.entidades.Formulario;
 
@@ -15,8 +18,9 @@ public interface FormularioRepository extends JpaRepository<Formulario, Long>{
 	@Query("SELECT obj FROM Formulario obj WHERE obj.pesquisa.id = :id_formulario ORDER BY genero")
 	List<Formulario> findByIdFormulario(@Param(value = "id_formulario") Long id_formulario);
 
+	@Modifying
 	@Query(nativeQuery = true, value = "SELECT count(id) FROM FORMULARIO WHERE  PESQUISA_ID = :id and OPCAO_VOTO like (:nomeCandidato);")
-	Integer findByQtdVotoPorCandidato(@Param(value = "id") Long id, @Param(value = "nomeCandidato") String nomeCandidato);
+	int findByQtdVotoPorCandidato(@Param(value = "id") Long id, @Param(value = "nomeCandidato") String nomeCandidato);
 
 	@Query(nativeQuery = true, value = "SELECT count(id) FROM FORMULARIO WHERE  PESQUISA_ID = :id and OPCAO_VOTO is null;")
 	int findByQtdVotoBrancoNulloPorPesquisa(@Param(value = "id") Long id);
