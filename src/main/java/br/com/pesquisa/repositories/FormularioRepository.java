@@ -15,7 +15,7 @@ public interface FormularioRepository extends JpaRepository<Formulario, Long>{
 	@Query("select obj from formulario obj where obj.pesquisa.id = :id_formulario ORDER BY genero")
 	List<Formulario> findByIdFormulario(@Param(value = "id_formulario") Long id_formulario);
 
-	@Query("select count(id) from formulario where pesquisa_id = :id and opcao_voto like (:nomeCandidato)")
+	@Query("select count(id) from formulario where pesquisa_id = :id and opcao_voto like (:nomeCandidato);")
 	int findByQtdVotoPorCandidato(@Param(value = "id") Long id, @Param(value = "nomeCandidato") String nomeCandidato);
 
 	@Query("select count(id) from formulario where pesquisa_id = :id and opcao_voto is null;")
