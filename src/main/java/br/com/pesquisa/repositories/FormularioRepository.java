@@ -12,28 +12,28 @@ import br.com.pesquisa.entidades.Formulario;
 @Repository
 public interface FormularioRepository extends JpaRepository<Formulario, Long>{
 
-	@Query("SELECT obj FROM Formulario obj WHERE obj.pesquisa.id = :id_formulario ORDER BY genero")
+	@Query("select obj from formulario obj where obj.pesquisa.id = :id_formulario ORDER BY genero")
 	List<Formulario> findByIdFormulario(@Param(value = "id_formulario") Long id_formulario);
 
-	@Query(nativeQuery = true, value = "SELECT count(id) FROM FORMULARIO WHERE  PESQUISA_ID = :id and OPCAO_VOTO like (:nomeCandidato);")
+	@Query("select count(id) from formulario where pesquisa_id = :id and opcao_voto like (:nomeCandidato)")
 	int findByQtdVotoPorCandidato(@Param(value = "id") Long id, @Param(value = "nomeCandidato") String nomeCandidato);
 
-	@Query(nativeQuery = true, value = "SELECT count(id) FROM FORMULARIO WHERE  PESQUISA_ID = :id and OPCAO_VOTO is null;")
+	@Query("select count(id) from formulario where pesquisa_id = :id and opcao_voto is null;")
 	int findByQtdVotoBrancoNulloPorPesquisa(@Param(value = "id") Long id);
 
-	@Query(nativeQuery = true, value = "select count(id) as voto_total from formulario where cidade like (:pesquisa);")
+	@Query("select count(id) as voto_total from formulario where cidade like (:pesquisa);")
 	int findByQtdVotoTotalPorPesquisa(@Param(value = "pesquisa") String pesquisa);
 	
-	@Query(nativeQuery = true, value = "SELECT count(id) FROM FORMULARIO WHERE  PESQUISA_ID = :id and APROVACAO_PRESIDENTE like (:qualificacao);")
+	@Query("select count(id) from formulario where pesquisa_id = :id and aprovacao_presidente like (:qualificacao);")
 	int findByQtdVotoQualificacaoPresidente(@Param(value = "id") Long id, @Param(value = "qualificacao") String qualificacao);
 
-	@Query(nativeQuery = true, value = "SELECT count(id) FROM FORMULARIO WHERE  PESQUISA_ID = :id and APROVACAO_GOVERNADOR like (:qualificacao);")
+	@Query("select count(id) from formulario where pesquisa_id = :id and aprovacao_governador like (:qualificacao);")
 	int findByQtdVotoQualificacaoGovernador(@Param(value = "id") Long id, @Param(value = "qualificacao") String qualificacao);
 	
-	@Query(nativeQuery = true, value = "SELECT count(id) FROM FORMULARIO WHERE  PESQUISA_ID = :id and APROVACAO_PREFEITO like (:qualificacao);")
+	@Query("select count(id) from formulario where pesquisa_id = :id and aprovacao_prefeito like (:qualificacao);")
 	int findByQtdVotoQualificacaoPrefeito(@Param(value = "id") Long id, @Param(value = "qualificacao") String qualificacao);
 	
-	@Query(nativeQuery = true, value = "SELECT count(id) as total FROM formulario WHERE id = id;")
+	@Query("select count(id) as total from formulario where id = id;")
 	int findByQuantidadeTotal();
 	
 	
