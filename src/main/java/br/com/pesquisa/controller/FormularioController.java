@@ -27,6 +27,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "https://projeto-pesquisa-fronte.vercel.app",  maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/formulario")
 public class FormularioController {
 
@@ -45,51 +46,51 @@ public class FormularioController {
 
 	@GetMapping("/todos")
 	@Operation(summary = "Listar Todos os Formulários")
-	public List<FormularioDto> listarConsultas() {
+	public List<FormularioDto> listarFormularios() {
 		List<Formulario> formularios = formularioRepository.findAll();
 		return FormularioService.listarTodosFormularios(formularios);
 	}
 	
 	@GetMapping("/votosCandidato/{id}/{nomeCandidato}")
 	@Operation(summary = "Quantidade de votos por candidato")
-	public int quantidadeDeVotos(@PathVariable Long id, @PathVariable String nomeCandidato) {
-		int qtd = formularioRepository.findByQtdVotoPorCandidato(id, nomeCandidato);
-		return qtd;
+	public ResponseEntity<Integer> quantidadeDeVotos(@PathVariable Long id, @PathVariable String nomeCandidato) {
+	int	qtd = formularioRepository.findByQtdVotoPorCandidato(id, nomeCandidato);
+		return ResponseEntity.ok().body(qtd);
 	}
 	
 	@GetMapping("/null/{id}")
 	@Operation(summary = "Quantidade de votos por candidato")
-	public int quantidadeDeVotosBrancoNulloPorPesquisa(@PathVariable Long id) {
+	public ResponseEntity<Integer> quantidadeDeVotosBrancoNulloPorPesquisa(@PathVariable Long id) {
 		int qtd = formularioRepository.findByQtdVotoBrancoNulloPorPesquisa(id);
-		return qtd;
+		return ResponseEntity.ok().body(qtd);
 	}
 	
 	@GetMapping("/votosPesquisa/{pesquisa}")
 	@Operation(summary = "Quantidade de votos por Pesquisa")
-	public int quantidadeDeVotosPorPesquisa(@PathVariable String pesquisa) {
+	public ResponseEntity<Integer> quantidadeDeVotosPorPesquisa(@PathVariable String pesquisa) {
 		int qtd = formularioRepository.findByQtdVotoTotalPorPesquisa(pesquisa);
-		return qtd;
+		return ResponseEntity.ok().body(qtd);
 	}
 	
 	@GetMapping("/qualificacaoPresidente/{id}/{qualificacao}")
 	@Operation(summary = "Quantidade de votos por qualificação Presidente")
-	public int quantidadeDeVotosPorQualificacaoPresidente(@PathVariable Long id, @PathVariable String qualificacao) {
+	public ResponseEntity<Integer> quantidadeDeVotosPorQualificacaoPresidente(@PathVariable Long id, @PathVariable String qualificacao) {
 		int qtd = formularioRepository.findByQtdVotoQualificacaoPresidente(id, qualificacao);
-		return qtd;
+		return ResponseEntity.ok().body(qtd);
 	}
 	
 	@GetMapping("/qualificacaoGovernador/{id}/{qualificacao}")
 	@Operation(summary = "Quantidade de votos por qualificação Governador")
-	public int quantidadeDeVotosPorQualificacaoGovernador(@PathVariable Long id, @PathVariable String qualificacao) {
+	public ResponseEntity<Integer> quantidadeDeVotosPorQualificacaoGovernador(@PathVariable Long id, @PathVariable String qualificacao) {
 		int qtd = formularioRepository.findByQtdVotoQualificacaoGovernador(id, qualificacao);
-		return qtd;
+		return ResponseEntity.ok().body(qtd);
 	}
 	
 	@GetMapping("/qualificacaoPrefeito/{id}/{qualificacao}")
 	@Operation(summary = "Quantidade de votos por qualificação Prefeito")
-	public int quantidadeDeVotosPorQualificacaoPrefeito(@PathVariable Long id, @PathVariable String qualificacao) {
+	public ResponseEntity<Integer> quantidadeDeVotosPorQualificacaoPrefeito(@PathVariable Long id, @PathVariable String qualificacao) {
 		int qtd = formularioRepository.findByQtdVotoQualificacaoPrefeito(id, qualificacao);
-		return qtd;
+		return ResponseEntity.ok().body(qtd);
 	}
 	
 	@GetMapping("/total")
