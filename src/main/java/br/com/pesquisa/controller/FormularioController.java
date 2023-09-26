@@ -24,6 +24,7 @@ import br.com.pesquisa.repositories.FormularioRepository;
 import br.com.pesquisa.service.FormularioService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 
 @RestController
 @CrossOrigin(origins = "https://projeto-pesquisa-fronte.vercel.app",  maxAge = 3600)
@@ -53,7 +54,7 @@ public class FormularioController {
 	
 	@GetMapping("/votosCandidato/{id}/{nomeCandidato}")
 	@Operation(summary = "Quantidade de votos por candidato")
-	public ResponseEntity<Integer> quantidadeDeVotos(@PathVariable Long id, @PathVariable String nomeCandidato) {
+	public ResponseEntity<Integer> quantidadeDeVotos(@PathVariable Long id, @PathParam(value = "nomeCandidato") String nomeCandidato) {
 	Integer qtd = formularioRepository.findByQtdVotoPorCandidato(id, nomeCandidato);
 		return ResponseEntity.ok().body(qtd);
 	}
