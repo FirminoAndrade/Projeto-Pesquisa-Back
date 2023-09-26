@@ -16,7 +16,7 @@ public interface FormularioRepository extends JpaRepository<Formulario, Long>{
 	List<Formulario> findByIdFormulario(@Param(value = "id_formulario") Long id_formulario);
 
 	@Query(nativeQuery = true, value = "SELECT count(id) FROM FORMULARIO WHERE  PESQUISA_ID = :id and OPCAO_VOTO like (:nomeCandidato);")
-	int findByQtdVotoPorCandidato(@Param(value = "id") Long id, @Param(value = "nomeCandidato") String nomeCandidato);
+	Integer findByQtdVotoPorCandidato(@Param(value = "id") Long id, @Param(value = "nomeCandidato") String nomeCandidato);
 
 	@Query(nativeQuery = true, value = "SELECT count(id) FROM FORMULARIO WHERE  PESQUISA_ID = :id and OPCAO_VOTO is null;")
 	int findByQtdVotoBrancoNulloPorPesquisa(@Param(value = "id") Long id);

@@ -54,7 +54,7 @@ public class FormularioController {
 	@GetMapping("/votosCandidato/{id}/{nomeCandidato}")
 	@Operation(summary = "Quantidade de votos por candidato")
 	public ResponseEntity<Integer> quantidadeDeVotos(@PathVariable Long id, @PathVariable String nomeCandidato) {
-	int	qtd = formularioRepository.findByQtdVotoPorCandidato(id, nomeCandidato);
+	Integer qtd = formularioRepository.findByQtdVotoPorCandidato(id, nomeCandidato);
 		return ResponseEntity.ok().body(qtd);
 	}
 	
