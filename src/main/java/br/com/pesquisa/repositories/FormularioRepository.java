@@ -12,7 +12,7 @@ import br.com.pesquisa.entidades.Formulario;
 @Repository
 public interface FormularioRepository extends JpaRepository<Formulario, Long>{
 
-	@Query("select obj from formulario obj where obj.pesquisa.id = :id_formulario ORDER BY genero")
+	@Query("Select obj from Formulario obj where obj.pesquisa.id = :id_formulario ORDER BY genero")
 	List<Formulario> findByIdFormulario(@Param(value = "id_formulario") Long id_formulario);
 
 	@Query(nativeQuery = true, value ="select count(id) from formulario where pesquisa_id = :id and opcao_voto like (:nomeCandidato);")
