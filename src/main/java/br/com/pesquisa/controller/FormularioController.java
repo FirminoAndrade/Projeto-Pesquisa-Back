@@ -51,7 +51,7 @@ public class FormularioController {
 		return FormularioService.listarTodosFormularios(formularios);
 	}
 	
-	@GetMapping("/votosCandidato/{id}/{nomeCandidato}")
+	@GetMapping("/votos/candidato/{id}/{nomeCandidato}")
 	@Operation(summary = "Quantidade de votos por candidato")
 	public int quantidadeDeVotos(@PathVariable Long id, @PathVariable String nomeCandidato) {
 		int qtd = formularioRepository.findByQtdVotoPorCandidato(id, nomeCandidato);
@@ -65,28 +65,28 @@ public class FormularioController {
 		return qtd;
 	}
 	
-	@GetMapping("/votosPesquisa/{pesquisa}")
+	@GetMapping("/votos/pesquisa/{pesquisa}")
 	@Operation(summary = "Quantidade de votos por Pesquisa")
 	public int quantidadeDeVotosPorPesquisa(@PathVariable String pesquisa) {
 		int qtd = formularioRepository.findByQtdVotoTotalPorPesquisa(pesquisa);
 		return qtd;
 	}
 	
-	@GetMapping("/qualificacaoPresidente/{id}/{qualificacao}")
+	@GetMapping("/qualificacao/presidente/{id}/{qualificacao}")
 	@Operation(summary = "Quantidade de votos por qualificação Presidente")
 	public int quantidadeDeVotosPorQualificacaoPresidente(@PathVariable Long id, @PathVariable String qualificacao) {
 		int qtd = formularioRepository.findByQtdVotoQualificacaoPresidente(id, qualificacao);
 		return qtd;
 	}
 	
-	@GetMapping("/qualificacaoGovernador/{id}/{qualificacao}")
+	@GetMapping("/qualificacao/governador/{id}/{qualificacao}")
 	@Operation(summary = "Quantidade de votos por qualificação Governador")
 	public int quantidadeDeVotosPorQualificacaoGovernador(@PathVariable Long id, @PathVariable String qualificacao) {
 		int qtd = formularioRepository.findByQtdVotoQualificacaoGovernador(id, qualificacao);
 		return qtd;
 	}
 	
-	@GetMapping("/qualificacaoPrefeito/{id}/{qualificacao}")
+	@GetMapping("/qualificacao/prefeito/{id}/{qualificacao}")
 	@Operation(summary = "Quantidade de votos por qualificação Prefeito")
 	public int quantidadeDeVotosPorQualificacaoPrefeito(@PathVariable Long id, @PathVariable String qualificacao) {
 		int qtd = formularioRepository.findByQtdVotoQualificacaoPrefeito(id, qualificacao);
